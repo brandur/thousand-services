@@ -1,0 +1,21 @@
+doctype 5
+
+html lang='en'
+  head
+    title= @title ? @title : "Story"
+
+    meta content='text/html; charset=utf-8' http-equiv='Content-Type'
+    meta name='author' content='Brandur Leach'
+    meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+
+    link href="//fonts.googleapis.com/css?family=Playfair+Display|EB+Garamond" rel="stylesheet" type="text/css"
+
+    link href="/assets/#{Story::Config.release}/app.css" media="screen" rel="stylesheet" type="text/css"
+    script src="/assets/#{Story::Config.release}/app.js" type="text/javascript"
+
+    / Enable HTML5 styling for the bane of the Internet
+    /[ if lt IE 9 ]
+      script src="//html5shim.googlecode.com/svn/trunk/html5.js"
+
+  body
+    == yield

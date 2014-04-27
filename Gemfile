@@ -1,0 +1,10 @@
+source "https://rubygems.org"
+
+gem "coffee-script"
+gem "puma"
+gem "sinatra", require: "sinatra/base"
+gem "sinatra-router"
+gem "slim"
+gem "sprockets"
+gem "uglifier"
+gem "yui-compressor"

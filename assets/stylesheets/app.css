@@ -1,4 +1,6 @@
 /*
  *= require_self
- *= require_tree .
+ *= require "reveal"
+ *= require "default"
+ *= require "extra"
 */

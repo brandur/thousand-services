@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 gem "coffee-script"
 gem "puma"
+gem "sass"
 gem "sinatra", require: "sinatra/base"
 gem "sinatra-router"
 gem "slim"

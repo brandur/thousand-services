@@ -4,6 +4,7 @@ module Story
       super
       path = "#{Story::Config.root}/assets"
       @assets = Sprockets::Environment.new do |env|
+        env.append_path(path + "/fonts")
         env.append_path(path + "/images")
         env.append_path(path + "/javascripts")
         env.append_path(path + "/stylesheets")
@@ -26,6 +27,12 @@ module Story
     %w{jpg png}.each do |format|
       get "/assets/:image.#{format}" do |image|
         respond_with_asset(@assets["#{image}.#{format}"])
+      end
+    end
+
+    %w{eot svg ttf woff}.each do |format|
+      get "/assets/:font.#{format}" do |font|
+        respond_with_asset(@assets["#{font}.#{format}"])
       end
     end
 

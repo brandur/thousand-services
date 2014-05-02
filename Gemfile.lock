@@ -14,6 +14,7 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
+    sass (3.2.16)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -41,6 +42,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-script
   puma
+  sass
   sinatra
   sinatra-router
   slim

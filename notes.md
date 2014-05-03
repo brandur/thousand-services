@@ -20,3 +20,7 @@ https://github.com/heroku/api/issues/1229
 # Resource nesting
 
 * Discussion: https://github.com/heroku/core/issues/922
+
+# Naming
+
+* Dyno v formation: https://github.com/heroku/api/issues/1686

@@ -159,7 +159,6 @@
       p Principles derived from designing the public API.
 
     section
-
       h2 Appropriate Status Codes
       p <code>201 or 202</code> on create; <code>200</code> elsewhere.
       .fragment
@@ -168,6 +167,16 @@
       .fragment
         h2 Times in ISO8601
         p 2012-01-01T12:00:00Z
+
+    section
+      h2 Downcase paths and attributes
+      p Hyphens in paths (e.g. `ssl-endpoints`); underscores in params (e.g. `created_at`)
+      .fragment
+        h2 Support Caching with Etag
+        p <code>If-None-Match: ...</code>
+      .fragment
+        h2 Transparent Rate Limit Status
+        p Include `RateLimit-Remaining` header
 
     section
       h1 JSON Schema

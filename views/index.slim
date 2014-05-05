@@ -3,6 +3,7 @@
     section
       h1 The Story of a Thousand Services
       p @brandur
+      img src="/assets/heroku-234.png"
 
     /section
       h1 API
@@ -11,6 +12,9 @@
     section
       h1 2013
       h2 Sure .. we have a public API ..
+
+    section
+      code heroku create
 
     section#butc
       h1 BUTC
@@ -139,16 +143,20 @@
       h2
         | (Continued)
 
-    section data-background="#090"
-      h1 Elect 
-      h2 an API Designer
-      p Bikeshed failsafe.
+    section
+      h1 V3
+      img src="/assets/v3.png"
 
     / https://www.flickr.com/photos/merlin1487/5518280677/in/photolist-9pCCAi-6AiCLY-6rkvcm-eeXET5-6rkuB1-aexiz1-4hos3V-dPuYkq-z1AUR-dvyY8j-5UJU2i-bt3pEr-5bg2EY-ab2M3Q-adNqFH-e9cq45-dvfem7-bmxLzc-939De-yNk29-46ZPYM-kZgCck-bFjZpF-6rgkct-adR9xJ-bzr3ra-dXJsTt-bM6rh2-beSTZ6-em5YUW-Bjeup-ffVGQW-9Hesv4-fKiAN3-adRqSY-9gUzi2-2X7KSR-ffVLMm-4Tg7Zd-bvWjJA-aGir6R-6f9VE8-6JFnZZ-fJiYY-Mhc6H-4h4wz-5a4Tik-3bTEdu-2fjzJ-bwuDC4
     section data-background="/assets/archive.jpg"
       h1 Archive
       h2 and
       h1 Reference
+
+    section data-background="#090"
+      h1 Elect 
+      h2 an API Designer
+      p Bikeshed failsafe.
 
     section
       h1 Re-use
@@ -160,28 +168,29 @@
 
     section
       h2 Appropriate Status Codes
-      p <code>201 or 202</code> on create; <code>200</code> elsewhere.
+      p <code>201</code> or <code>202</code> on create; <code>200</code> elsewhere.
       .fragment
         h2 Paginate With Range
         p <code>Range id ..; max=1</code>
       .fragment
         h2 Times in ISO8601
-        p 2012-01-01T12:00:00Z
+        p <code>2012-01-01T12:00:00Z</code>
 
     section
       h2 Downcase paths and attributes
-      p Hyphens in paths (e.g. `ssl-endpoints`); underscores in params (e.g. `created_at`)
+      p Hyphens in paths (e.g. <code>ssl-endpoints</code>); underscores in params (e.g. <code>created_at</code>)
       .fragment
         h2 Support Caching with Etag
         p <code>If-None-Match: ...</code>
       .fragment
         h2 Transparent Rate Limit Status
-        p Include `RateLimit-Remaining` header
+        p Include <code>RateLimit-Remaining</code> header
 
     section
       h1 JSON Schema
 
-    section
+    section#schema
+      p Schema
       pre
         code
           | {
@@ -199,6 +208,12 @@
               },
               "required": ["name"]
             }
+      p Data
+      pre
+        code
+          | {
+              "name": "my-app"
+            }
 
     / http://fracfx.deviantart.com/art/Warp-Speed-254886611
     section#hyper data-background="/assets/warp-speed.jpg"
@@ -206,7 +221,8 @@
       h1 HYPER
       h2 Schema
 
-    section
+    section#hyper-2
+      p Schema
       pre
         code
           | {
@@ -225,17 +241,17 @@
                         "name": {
                           "$ref": "#/definitions/name"
                         }
-                      }
-                    }
-                  }
-                ]
-              }
-            }
+                        ...
+      p Schema
+      pre
+        code
+          | POST /apps -H "Content-Type: application/json" -d '{"name":"my-app"}'
+            => {"name":"my-app"}
 
     section
       h1 Convention
       h2 through
-      h1 Rigidity
+      h1 Constraint
       p How do I ... ?
 
     section

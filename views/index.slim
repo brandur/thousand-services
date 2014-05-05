@@ -143,13 +143,9 @@
       h2
         | (Continued)
 
-    section
-      h1 V3
-      img src="/assets/v3.png"
-
     / https://www.flickr.com/photos/merlin1487/5518280677/in/photolist-9pCCAi-6AiCLY-6rkvcm-eeXET5-6rkuB1-aexiz1-4hos3V-dPuYkq-z1AUR-dvyY8j-5UJU2i-bt3pEr-5bg2EY-ab2M3Q-adNqFH-e9cq45-dvfem7-bmxLzc-939De-yNk29-46ZPYM-kZgCck-bFjZpF-6rgkct-adR9xJ-bzr3ra-dXJsTt-bM6rh2-beSTZ6-em5YUW-Bjeup-ffVGQW-9Hesv4-fKiAN3-adRqSY-9gUzi2-2X7KSR-ffVLMm-4Tg7Zd-bvWjJA-aGir6R-6f9VE8-6JFnZZ-fJiYY-Mhc6H-4h4wz-5a4Tik-3bTEdu-2fjzJ-bwuDC4
     section data-background="/assets/archive.jpg"
-      h1 Archive
+      h1 Document
       h2 and
       h1 Reference
 
@@ -157,6 +153,10 @@
       h1 Elect 
       h2 an API Designer
       p Bikeshed failsafe.
+
+    section
+      h1 V3
+      img src="/assets/v3.png"
 
     section
       h1 Re-use
@@ -171,7 +171,7 @@
       p <code>201</code> or <code>202</code> on create; <code>200</code> elsewhere.
       .fragment
         h2 Paginate With Range
-        p <code>Range id ..; max=1</code>
+        p <code>Range: id ..; max=1</code>
       .fragment
         h2 Times in ISO8601
         p <code>2012-01-01T12:00:00Z</code>
@@ -188,6 +188,7 @@
 
     section
       h1 JSON Schema
+      <a href="http://json-schema.org/">json-schema.org</a>
 
     section#schema
       p Schema
@@ -256,7 +257,8 @@
 
     section
       h1 Clients
-      | <a href="https://github.com/bgentry/heroku-go">Go</a> / <a href="https://github.com/jclem/node-heroku-client">JavaScript</a> / <a href="https://github.com/heroku/heroics">Ruby</a> / <a href="https://github.com/sclasen/heroku.scala">Scala</a>
+      p <a href="https://github.com/bgentry/heroku-go">Go</a> / <a href="https://github.com/jclem/node-heroku-client">JavaScript</a> / <a href="https://github.com/heroku/heroics">Ruby</a> / <a href="https://github.com/sclasen/heroku.scala">Scala</a>
+      p <a href="https://github.com/heroku/hk">github.com/heroku/hk</a>
 
     section
       h1 Prmd
@@ -272,9 +274,18 @@
       h1 Why not Thrift?
       h2 Accessibility & Composability & Documentation
 
-    section
+    /section
       h1 Accessibility
       h2 Curl Everything
+
+    section
+      h1 Symmetry
+      ul
+        li
+          | Services use schema to validate:
+          ul
+            li Incoming requests.
+            li Outgoing requests to <em>other</em> services.
 
     section#composability
       h1 Composability
@@ -284,6 +295,10 @@
         code
           | curl -H "Accept: application/vnd.heroku+json; version=3" \
               https://api.heroku.com/schema
+
+    section
+      h1 API as a Service
+      img src="/assets/v3-builds.png"
 
     section
       img src="/assets/consolidation.png"

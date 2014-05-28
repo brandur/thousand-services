@@ -17,11 +17,11 @@
       h1 Grown From the CLI
       code heroku create
 
-    section
+    /section
       h1 Bust the
       h1 Monorail
 
-    section
+    /section
       img src="/assets/evacuation.png"
 
     section
@@ -101,7 +101,7 @@
         code
           | GET /v1/events/app/heroku.com/my-heroku-app/1342656521290
 
-    section
+    /section
       h1 API Conventions
       h1 Are Subjective
 
@@ -145,12 +145,12 @@
         | (Continued)
 
     / https://www.flickr.com/photos/merlin1487/5518280677/in/photolist-9pCCAi-6AiCLY-6rkvcm-eeXET5-6rkuB1-aexiz1-4hos3V-dPuYkq-z1AUR-dvyY8j-5UJU2i-bt3pEr-5bg2EY-ab2M3Q-adNqFH-e9cq45-dvfem7-bmxLzc-939De-yNk29-46ZPYM-kZgCck-bFjZpF-6rgkct-adR9xJ-bzr3ra-dXJsTt-bM6rh2-beSTZ6-em5YUW-Bjeup-ffVGQW-9Hesv4-fKiAN3-adRqSY-9gUzi2-2X7KSR-ffVLMm-4Tg7Zd-bvWjJA-aGir6R-6f9VE8-6JFnZZ-fJiYY-Mhc6H-4h4wz-5a4Tik-3bTEdu-2fjzJ-bwuDC4
-    section data-background="/assets/archive.jpg"
+    /section data-background="/assets/archive.jpg"
       h1 Document
       h2 and
       h1 Reference
 
-    section data-background="#090"
+    /section data-background="#090"
       h1 Elect 
       h2 an API Designer
       p Bikeshed failsafe.
@@ -166,6 +166,9 @@
     section
       h1 Design Guidelines
       p Principles derived from designing the public API.
+      p
+        a href="https://github.com/interagent/http-design-guidelines"
+          | github.com/interagent/http-design-guidelines
 
     section
       h2 Appropriate Status Codes
@@ -191,15 +194,55 @@
       h1 JSON Schema
       <a href="http://json-schema.org/">json-schema.org</a>
 
-    section#schema
-      p Schema
+    section
+      h2 Validates a JSON Value
       pre
         code
           | {
-              "title": "App",
-              "type": "object",
+              "type": "string"
+            }
+      / Check
+      p ✓ "foo"
+      p ✗ 42
+
+    section
+      h2 More Complex Rules
+      pre
+        code
+          | {
+              "pattern": "^[a-z][a-z0-9-]{3,30}$",
+              "type": "string"
+            }
+      / Check
+      p ✓ "my-app"
+      p ✗ "my_app"
+
+    section
+      h2 Schemas Nest
+      pre
+        code
+          | {
+              "properties": {
+                "name", {
+                  "pattern": "^[a-z][a-z0-9-]{3,30}$",
+                  "type": "string"
+                }
+              },
+              "required": ["name"],
+              "type": "object"
+            }
+      / Check
+      p ✓ { "name": "my-app" }
+      p ✗ {}
+
+    section
+      h2 Uses JSON Reference
+      pre
+        code
+          | {
               "definitions": {
                 "name": {
+                  "pattern": "^[a-z][a-z0-9-]{3,30}$",
                   "type": "string"
                 }
               },
@@ -208,14 +251,59 @@
                   "$ref": "#/definitions/name"
                 }
               },
-              "required": ["name"]
+              "required": ["name"],
+              "type": "object"
             }
-      p Data
+      p `$ref` under "properties" is a JSON Reference to "definitions"
+
+    section
+      h2 Schemas Nest to Any Depth
       pre
         code
           | {
-              "name": "my-app"
+              "definitions": {
+                "domain": {
+                  "properties": {
+                    "name": {
+                      "format": "hostname",
+                      "type": "string"
+                    }
+                  }
+                },
+                "app": {
+                  "properties": {
+                    "domains": {
+                      "items": {
+                        "$ref": "#/definitions/domain"
+                      },
+                      "type": "array"
+                    }
+                  }
+                }
+              }
+              ...
             }
+
+    section
+      / Check
+      h2 ✓
+      pre
+        code
+          | {
+              "name": "my-app",
+              "domains": [
+                { "name": "example.com },
+                { "name": "heroku.com" }
+              ]
+            }
+
+    section
+      h2 Suitable for all kinds of validation
+      / TODO
+      ul
+        li Schema for Collection+JSON
+        li Schema for HAL
+        li Schema for UBER
 
     / http://fracfx.deviantart.com/art/Warp-Speed-254886611
     section#hyper data-background="/assets/warp-speed.jpg"
@@ -223,53 +311,274 @@
       h1 HYPER
       h2 Schema
 
-    section#hyper-2
-      p Schema
+    section
+      h2 Gives Schemas Links
       pre
         code
           | {
-              "title": "App",
-              "definitions": ...
-              "properties": ...
-              "links": {
-                [
-                  {
-                    "title":       "Create",
-                    "href":        "/apps",
-                    "method":      "POST",
-                    "rel":         "create",
-                    "schema": {
-                      "properties": {
-                        "name": {
-                          "$ref": "#/definitions/name"
-                        }
-                        ...
-      p Schema
+              "links": [
+                {
+                  "description": "Create a new app.",
+                  "href": "/apps",
+                  "method": "POST",
+                  "rel": "create"
+                },
+                {
+                  "description": "List apps.",
+                  "href": "/apps",
+                  "method": "GET",
+                  "rel": "instances"
+                }
+              ],
+              "properties": {
+                "name", {
+                   ...
+                }
+              },
+              "required": ["name"],
+              "type": "object"
+            }
+
+    section
+      h2 Schema of a Link's Request
       pre
         code
-          | POST /apps -H "Content-Type: application/json" -d '{"name":"my-app"}'
-            => {"name":"my-app"}
+          | {
+              "description": "Create a new app.",
+              "href": "/apps",
+              "method": "POST",
+              "rel": "create",
+              "schema": {
+                "properties": {
+                  "name": {
+                    "$ref": "#/definitions/app/definitions/name"
+                   }
+                 },
+                 "required": ["name"],
+                 "type": "object"
+              },
+              "title": "Create"
+            }
 
     section
-      h1 Convention
-      h2 through
-      h1 Constraint
-      p How do I ... ?
+      / Check
+      h2 ✓
+      pre
+        code
+          | curl -X POST http://example.com/apps \
+              -H "Content-Type: application/json" \
+              -d '{"name":"my-app"}'
 
     section
-      h1 Clients
-      p <a href="https://github.com/bgentry/heroku-go">Go</a> / <a href="https://github.com/jclem/node-heroku-client">JavaScript</a> / <a href="https://github.com/heroku/heroics">Ruby</a> / <a href="https://github.com/sclasen/heroku.scala">Scala</a>
-      p <a href="https://github.com/heroku/hk">github.com/heroku/hk</a>
+      h2 Schema of a Link's Response
+      pre
+        code
+          | {
+              "description": "List apps.",
+              "href": "/apps",
+              "method": "GET",
+              "rel": "instances",
+              "targetSchema": {
+                "items": {
+                  "$ref": "#/definitions/app"
+                },
+                "type": "array"
+              },
+              "title": "List"
+            }
+      p Note the reference to the link's parent
+
+    section
+      / Check
+      h2 ✓
+      pre
+        code
+          | curl -X POST http://example.com/apps
+            [
+              {
+                "name": "my-app",
+                "domains": [
+                  { "name": "example.com },
+                  { "name": "heroku.com" }
+                ]
+              }
+            ]
+
+    section
+      h1 Meta Schemas
+      p
+        a href="http://json-schema.org/draft-04/hyper-schema#"
+          | http://json-schema.org/draft-04/hyper-schema#
+      p
+        a href="http://json-schema.org/draft-04/schema#"
+          | http://json-schema.org/draft-04/schema#
+
+    section
+      h2 JSON Which Validates JSON Which Validates JSON
+      / Check
+      h2 ✓
+      pre
+        code
+          | {
+              "definitions": {
+                "domain": {
+                  links: [
+                    ...
+                  ]
+                  ...
+                },
+                "app": {
+                  links: [
+                    ...
+                  ]
+                  ...
+                }
+              }
+              ...
+            }
+
+    section
+      h2 Define Your Own!
+      pre
+        code
+          | {
+              "definitions": {
+                "resource": {
+                  "properties": {
+                    "links": {
+                      "items": {
+                        "$ref": "#/definitions/link"
+                      },
+                      "type": "array"
+                    }
+                  }
+                },
+                "link": {
+                  "required": [ "method", "targetSchema" ],
+                  "type": "object"
+                }
+              },
+              ...
+            }
+      p Requires links to have `method` and `targetSchema`
+
+    section
+      pre
+        code
+          | {
+              "resource": {
+                "properties": {
+                  ...,
+                  "properties": {
+                    "additionalProperties": false,
+                    "patternProperties": {
+                      "^[a-z][a-z_]+[a-z]$": {}
+                    }
+                  }
+                }
+              }
+            }
+      p Requires params to use only `[a-z]` and underscores
+      / Check
+      p ✓ parameter_name
+      p ✗ parameter-name
+
+    section
+      h2 Check out Heroku's!
+      pre
+        code
+          | $ curl -H "Accept: application/vnd.heroku+json; version=3" \
+              https://api.heroku.com/schema -o schema.json
+
+    section
+      h1 Human + Machine Readable
+
+    section
+      h1 Heroics
+      h2 Ruby client generation
+      a href="https://github.com/interagent/heroics"
+        | github.com/interagent/heroics
+      pre
+        code
+          | $ heroics-generate schema.json > client.rb
+      pre
+        code
+          | > heroku.app.create
+            => { ... }
+
+    section
+      h1 Schematic
+      h2 Go client generation
+      a href="https://github.com/interagent/schematic"
+        | github.com/interagent/schematic
+      pre
+        code
+          | $ schematic schema.json > client.rb
+      pre
+        code
+          | > heroku.app.create
+          | app, err := h.AppCreate()
+            if err != nil {
+               panic(err)
+            }
+            fmt.Println(app.Name)
 
     section
       h1 Prmd
-      h2 Tools & Documentation
+      h2 Documentation & tools
       p <a href="https://github.com/interagent/prmd">github.com/interagent/prmd</a>
+      img src="/assets/v3.png"
 
     section
       h1 Committee
       h2 Validation & Stubbing
       p <a href="https://github.com/heroku/committee">github.com/heroku/committee</a>
+      pre
+        code
+          | $ committee-stub -p 3000 schema.json
+      pre
+        code
+          | $ curl http://localhost:3000/apps/my-app
+            {
+              "created_at": "2012-01-01T12:00:00Z",
+              "git_url": "git@heroku.com:example.git",
+              "id": "01234567-89ab-cdef-0123-456789abcdef",
+              "name": "example"
+            }
+
+    section
+      h2 Stub Distributed Services
+      pre
+        code
+          | help_stub:    bundle exec committee-stub -p 3000 help/schema.json
+            logplex_stub: bundle exec committee-stub -p 3001 logplex/schema.json
+            maestro_stub: bundle exec committee-stub -p 3002 maestro/schema.json
+            psmgr_stub:   bundle exec committee-stub -p 3003 psmgr/schema.json
+            vault_stub:   bundle exec committee-stub -p 3004 vault/schema.json
+
+    section
+      h2 Test Public Contracts
+      pre
+        code
+          | def schema_path
+              "./schema.json"
+            end
+
+            it "conforms to schema" do
+              @app = App.create! name: "my-app"
+              get "/apps/my-app"
+              assert_equal 200, last_response.status
+              assert_schema_conform
+            end
+
+    section#score
+      ul
+        li HTTP API guidelines codifies best practices
+        li Schema validates requests
+        li Schema tests contracts
+        li Schema generates clients
+        li Schema generations documentation
+        li Meta-schema validates conventions
 
     /section
       h1 Why not Thrift?
@@ -279,29 +588,7 @@
       h1 Accessibility
       h2 Curl Everything
 
-    section
-      h1 Symmetry
-      ul
-        li
-          | Services use schema to validate:
-          ul
-            li Incoming requests.
-            li Outgoing requests to <em>other</em> services.
-
-    section#composability
-      h1 Composability
-      h2 The master schema
-
-      pre
-        code
-          | curl -H "Accept: application/vnd.heroku+json; version=3" \
-              https://api.heroku.com/schema
-
-    section
-      h1 API as a Service
-      img src="/assets/v3-builds.png"
-
-    section
+    /section
       img src="/assets/consolidation.png"
 
     section

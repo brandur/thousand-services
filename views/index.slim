@@ -1,10 +1,8 @@
 /TODO
-/  Mention hk in Schematic.
-/  Link to Heroku meta-schema.
 /  Show generic Markdown document from Prmd
 /  Color checkmarks
-/  Link up Hypermedia schemas
-/  Remove versioning #2 and #3
+/  More Committee info
+/  Screen shot for sell internally
 
 .reveal
   .slides
@@ -12,6 +10,9 @@
       h1 The Story of a Thousand Services
       p @brandur
       img src="/assets/heroku-234.png"
+      p
+        a href="https://thousand-services.herokuapp.com"
+          | thousand-services.herokuapp.com
 
     /section
       h1 API
@@ -141,13 +142,13 @@
         /p <code>/v3</code>
         /p <code>application/vnd.heroku+json; version=3</code>
 
-    section data-background="/assets/versioning-2.jpg"
+    /section data-background="/assets/versioning-2.jpg"
       .light
         h1 Versioning
         h2
           | (Continued)
 
-    section data-background="/assets/versioning-3.jpg"
+    /section data-background="/assets/versioning-3.jpg"
       h1 Versioning
       h2
         | (Continued)
@@ -309,9 +310,18 @@
       h2 Suitable for all kinds of validation
       / TODO
       ul
-        li Schema for Collection+JSON
-        li Schema for HAL
-        li Schema for UBER
+        li
+          a href="http://hyperschema.org/mediatypes/collection-json"
+            | Schema for Collection+JSON
+        li
+          a href="http://hyperschema.org/mediatypes/hal"
+            | Schema for HAL
+        li 
+          a href="http://hyperschema.org/mediatypes/siren"
+            | Schema for Siren
+        li 
+          a href="http://hyperschema.org/mediatypes/uber"
+            | Schema for UBER
 
     / http://fracfx.deviantart.com/art/Warp-Speed-254886611
     section#hyper data-background="/assets/warp-speed.jpg"
@@ -413,13 +423,20 @@
             ]
 
     section
-      h1 Meta Schemas
-      p
-        a href="http://json-schema.org/draft-04/hyper-schema#"
-          | http://json-schema.org/draft-04/hyper-schema#
+      h2 Check out Heroku's!
+      pre
+        code
+          | $ curl -H "Accept: application/vnd.heroku+json; version=3" \
+              https://api.heroku.com/schema -o schema.json
+
+    section
+      h1 Meta-schemas
       p
         a href="http://json-schema.org/draft-04/schema#"
           | http://json-schema.org/draft-04/schema#
+      p
+        a href="http://json-schema.org/draft-04/hyper-schema#"
+          | http://json-schema.org/draft-04/hyper-schema#
 
     section
       h2 JSON Which Validates JSON Which Validates JSON
@@ -492,11 +509,11 @@
       p ✗ parameter-name
 
     section
-      h2 Check out Heroku's!
+      h2 Check out Heroku's Meta-schema!
+
       pre
         code
-          | $ curl -H "Accept: application/vnd.heroku+json; version=3" \
-              https://api.heroku.com/schema -o schema.json
+          | $ curl https://interagent.github.io/interagent-hyper-schema -o meta.json
 
     section
       h1 Human + Machine Readable
@@ -521,7 +538,7 @@
         | github.com/interagent/schematic
       pre
         code
-          | $ schematic schema.json > client.rb
+          | $ schematic schema.json > client.go
       pre
         code
           | > heroku.app.create
@@ -582,11 +599,22 @@
     section#score
       ul
         li HTTP API guidelines codifies best practices
-        li Schema validates requests
-        li Schema tests contracts
         li Schema generates clients
         li Schema generations documentation
+        li Schema stubs remote services
+        li Schema tests contracts
+        li Schema validates requests
         li Meta-schema validates conventions
+
+    section
+      h1 Sell Internally
+      ul
+        li
+          a href="https://devcenter.heroku.com/articles/platform-api-reference#app-setup" App Setups
+        li
+          a href="https://devcenter.heroku.com/articles/platform-api-reference#build" builds
+        li
+          a href="https://devcenter.heroku.com/articles/platform-api-reference#organization" Orgs
 
     /section
       h1 Why not Thrift?
@@ -596,7 +624,7 @@
       h1 Accessibility
       h2 Curl Everything
 
-    /section
+    section
       img src="/assets/consolidation.png"
 
     section

@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>The Story of a Thousand Services</title>
+
+  <meta content="Brandur Leach" name="author">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+  <link href="./assets/css" rel="stylesheet" type="text/css">
+  <link href="./assets/app.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="./assets/app.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+  <div class="reveal none center" data-transition-speed="default" data-background-transition="default">
+    <div class="slides" style="width: 960px; height: 700px; zoom: 1;">
+      <section style="top: -309px; display: block;" class="present">
+        <h1>
+          The Story of a Thousand Services
+        </h1>
+        <p>
+          @brandur
+        </p>
+        <img src="./assets/heroku-234.png">
+        <p>
+          <a href="https://brandur.github.io/thousand-services">brandur.github.io/thousand-services</a>
+        </p>
+      </section>
+      <section style="top: -166px; display: block;" hidden="" class="future">
+        <h1>
+          2013
+        </h1>
+        <h2>
+          Sure .. we have a public API ..
+        </h2>
+      </section>
+      <section style="top: -139.5px; display: block;" hidden="" class="future">
+        <h1>
+          Grown From the CLI
+        </h1>
+        <code>heroku create</code>
+      </section>
+      <section style="top: -195.5px; display: block;" hidden="" class="future">
+        <h1>
+          A Diverse API
+        </h1>
+        <h1>
+          Ecosystem Sprung Forth
+        </h1>
+      </section>
+      <section id="login" style="top: -20px; display: none;" hidden="" class="future">
+        <h2>
+          Successful Login
+        </h2>
+        <pre><code class="brainfuck"><span class="comment">$</span> <span class="comment">curl</span> <span class="literal">-</span><span class="comment">X</span> <span class="comment">POST</span> <span class="comment">https://api</span>.<span class="comment">heroku</span>.<span class="comment">com/login</span> <span class="comment">\</span>
+  <span class="literal">-</span><span class="comment">d</span> <span class="comment">"email=</span>.<span class="string">.</span><span class="string">.</span><span class="comment">"</span> <span class="literal">-</span><span class="comment">d</span> <span class="comment">"password=good"</span>
+<span class="comment">HTTP/1</span>.<span class="comment">1</span> <span class="comment">200</span> <span class="comment">OK</span>
+<span class="comment">Content</span>-<span class="comment">Type:</span> <span class="comment">application/json</span>
+
+<span class="comment">{</span> <span class="comment">"email":</span> <span class="comment">"</span>.<span class="string">.</span><span class="string">.</span><span class="comment">"</span> <span class="comment">}</span></code></pre>
+        <div class="fragment" data-fragment-index="0">
+          <h2>
+            Unsuccessful Login
+          </h2>
+          <pre><code class="lasso">$ curl <span class="attribute">-X</span> POST https:<span class="comment">//api.heroku.com/login \</span>
+  <span class="attribute">-d</span> <span class="string">"email=..."</span> <span class="attribute">-d</span> <span class="string">"password=bad"</span>
+HTTP/<span class="number">1.1</span> <span class="number">404</span> <span class="literal">Not</span> Found
+Content<span class="attribute">-Type</span>: text/plain
+
+<span class="string">""</span></code></pre>
+        </div>
+      </section>
+      <section id="login-2" style="top: -20px; display: none;" hidden="" class="future">
+        <pre><code class="brainfuck"><span class="comment">$</span> <span class="comment">curl</span> <span class="literal">-</span><span class="comment">X</span> <span class="comment">POST</span> <span class="comment">https://api</span>.<span class="comment">heroku</span>.<span class="comment">com/login</span> <span class="comment">\</span>
+  <span class="literal">-</span><span class="comment">d</span> <span class="comment">"login_user</span>[<span class="comment">email</span>]<span class="comment">=</span>.<span class="string">.</span><span class="string">.</span><span class="comment">"</span></code></pre>
+        <div class="fragment" data-fragment-index="0">
+          <h2>
+            or . . .
+          </h2>
+          <pre><code class="brainfuck"><span class="comment">$</span> <span class="comment">curl</span> <span class="literal">-</span><span class="comment">X</span> <span class="comment">POST</span> <span class="comment">https://api</span>.<span class="comment">heroku</span>.<span class="comment">com/login</span> <span class="comment">\</span>
+  <span class="literal">-</span><span class="comment">d</span> <span class="comment">"username=</span>.<span class="string">.</span><span class="string">.</span><span class="comment">"</span></code></pre>
+        </div>
+        <div class="fragment" data-fragment-index="1">
+          <h2>
+            or . . .
+          </h2>
+          <pre><code class="brainfuck"><span class="comment">$</span> <span class="comment">curl</span> <span class="literal">-</span><span class="comment">X</span> <span class="comment">POST</span> <span class="comment">https://api</span>.<span class="comment">heroku</span>.<span class="comment">com/login</span> <span class="comment">\</span>
+  <span class="literal">-</span><span class="comment">d</span> <span class="comment">"email=</span>.<span class="string">.</span><span class="string">.</span><span class="comment">"</span></code></pre>
+        </div>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h1>
+          Read. Think. Discuss.
+        </h1>
+      </section>
+      <section data-background="/assets/uuids.jpg" style="top: -20px; display: none;" hidden="" class="future">
+        <div class="light">
+          <h1>
+            UUIDs
+          </h1>
+          <h2>
+            vs.
+          </h2>
+          <h1>
+            Integer IDs
+          </h1>
+        </div>
+      </section>
+      <section data-background="/assets/request-bodies.jpg" style="top: -20px; display: none;" hidden="" class="future">
+        <div class="light">
+          <h1>
+            Request Bodies
+          </h1>
+          <h2>
+            application/json vs.
+          </h2>
+          <h2>
+            application/x-form-www-urlencoded
+          </h2>
+        </div>
+      </section>
+      <section data-background="/assets/naming.jpg" style="top: -20px; display: none;" hidden="" class="future">
+        <div class="light">
+          <h1>
+            Naming Things
+          </h1>
+          <p>
+            There are two hard problems in computer science ...
+          </p>
+        </div>
+      </section>
+      <section data-background="/assets/nullable-parameters.jpg" style="top: -20px; display: none;" hidden=""
+        class="future">
+        <div class="light">
+          <h1>
+            Nullable Request
+          </h1>
+          <h1>
+            Parameters
+          </h1>
+        </div>
+      </section>
+      <section data-background="/assets/versioning.jpg" style="top: -20px; display: none;" hidden="" class="future">
+        <div class="light">
+          <h1>
+            URL vs. Header Versioning
+          </h1>
+        </div>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h1>
+          V3
+        </h1>
+        <img src="./assets/v3.png">
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h1>
+          Re-use
+        </h1>
+        <h2>
+          Convention can be hard-earned
+        </h2>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h1>
+          Design Guidelines
+        </h1>
+        <p>
+          Principles derived from designing the public API.
+        </p>
+        <p>
+          <a
+            href="https://github.com/interagent/http-design-guidelines">github.com/interagent/http-design-guidelines</a>
+        </p>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h2>
+          Appropriate Status Codes
+        </h2>
+        <p><code>201</code> or <code>202</code> on create; <code>200</code> elsewhere.
+        </p>
+        <div class="fragment" data-fragment-index="0">
+          <h2>
+            Paginate With Range
+          </h2>
+          <p><code>Range: id ..; max=1</code>
+          </p>
+        </div>
+        <div class="fragment" data-fragment-index="1">
+          <h2>
+            Times in ISO8601
+          </h2>
+          <p><code>2012-01-01T12:00:00Z</code>
+          </p>
+        </div>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h2>
+          Downcase paths and attributes
+        </h2>
+        <p>Hyphens in paths (e.g. <code>ssl-endpoints</code>); underscores in params (e.g. <code>created_at</code>)
+        </p>
+        <div class="fragment" data-fragment-index="0">
+          <h2>
+            Support Caching with Etag
+          </h2>
+          <p><code>If-None-Match: ...</code>
+          </p>
+        </div>
+        <div class="fragment" data-fragment-index="1">
+          <h2>
+            Transparent Rate Limit Status
+          </h2>
+          <p>Include <code>RateLimit-Remaining</code> header
+          </p>
+        </div>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h1>
+          JSON Schema
+        </h1>
+        <a href="http://json-schema.org/">json-schema.org</a>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h2>
+          Validates a JSON Value
+        </h2>
+        <pre><code class="json">{
+  "<span class="attribute">type</span>": <span class="value"><span class="string">"string"</span>
+</span>}</code></pre>
+        <p>
+          ✓ "foo"
+        </p>
+        <p>
+          ✗ 42
+        </p>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h2>
+          More Complex Rules
+        </h2>
+        <pre><code class="json">{
+  "<span class="attribute">pattern</span>": <span class="value"><span class="string">"^[a-z][a-z0-9-]{3,30}$"</span></span>,
+  "<span class="attribute">type</span>": <span class="value"><span class="string">"string"</span>
+</span>}</code></pre>
+        <p>
+          ✓ "my-app"
+        </p>
+        <p>
+          ✗ "my_app"
+        </p>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h2>
+          Schemas Nest
+        </h2>
+        <pre><code class="json">{
+  "<span class="attribute">properties</span>": <span class="value">{
+    "<span class="attribute">name</span>": <span class="value">{
+      "<span class="attribute">pattern</span>": <span class="value"><span class="string">"^[a-z][a-z0-9-]{3,30}$"</span></span>,
+      "<span class="attribute">type</span>": <span class="value"><span class="string">"string"</span>
+    </span>}
+  </span>}</span>,
+  "<span class="attribute">required</span>": <span class="value">[<span class="string">"name"</span>]</span>,
+  "<span class="attribute">type</span>": <span class="value"><span class="string">"object"</span>
+</span>}</code></pre>
+        <p>
+          ✓ { "name": "my-app" }
+        </p>
+        <p>
+          ✗ {}
+        </p>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h2>
+          Uses JSON Reference
+        </h2>
+        <pre><code class="json">{
+  "<span class="attribute">definitions</span>": <span class="value">{
+    "<span class="attribute">name</span>": <span class="value">{
+      "<span class="attribute">pattern</span>": <span class="value"><span class="string">"^[a-z][a-z0-9-]{3,30}$"</span></span>,
+      "<span class="attribute">type</span>": <span class="value"><span class="string">"string"</span>
+    </span>}
+  </span>}</span>,
+  "<span class="attribute">properties</span>": <span class="value">{
+    "<span class="attribute">name</span>": <span class="value">{
+      "<span class="attribute">$ref</span>": <span class="value"><span class="string">"#/definitions/name"</span>
+    </span>}
+  </span>}</span>,
+  "<span class="attribute">required</span>": <span class="value">[<span class="string">"name"</span>]</span>,
+  "<span class="attribute">type</span>": <span class="value"><span class="string">"object"</span>
+</span>}</code></pre>
+        <p>
+          `$ref` under "properties" is a JSON Reference to "definitions"
+        </p>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h2>
+          Schemas Nest to Any Depth
+        </h2>
+        <pre><code class="json">{
+  "<span class="attribute">definitions</span>": <span class="value">{
+    "<span class="attribute">domain</span>": <span class="value">{
+      "<span class="attribute">properties</span>": <span class="value">{
+        "<span class="attribute">name</span>": <span class="value">{
+          "<span class="attribute">format</span>": <span class="value"><span class="string">"hostname"</span></span>,
+          "<span class="attribute">type</span>": <span class="value"><span class="string">"string"</span>
+        </span>}
+      </span>}
+    </span>}</span>,
+    "<span class="attribute">app</span>": <span class="value">{
+      "<span class="attribute">properties</span>": <span class="value">{
+        "<span class="attribute">domains</span>": <span class="value">{
+          "<span class="attribute">items</span>": <span class="value">{
+            "<span class="attribute">$ref</span>": <span class="value"><span class="string">"#/definitions/domain"</span>
+          </span>}</span>,
+          "<span class="attribute">type</span>": <span class="value"><span class="string">"array"</span>
+        </span>}
+      </span>}
+    </span>}
+  </span>}
+  ...
+</span>}</code></pre>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h2>
+          ✓
+        </h2>
+        <pre><code class="matlab"><span class="cell">{
+  "name": "my-app",
+  "domains": [
+    { "name": "example.com }</span>,
+    <span class="cell">{ "name": "heroku.com" }</span>
+  ]
+}</code></pre>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h2>
+          Suitable for all kinds of validation
+        </h2>
+        <ul>
+          <li>
+            <a href="http://hyperschema.org/mediatypes/collection-json">Schema for Collection+JSON</a>
+          </li>
+          <li>
+            <a href="http://hyperschema.org/mediatypes/hal">Schema for HAL</a>
+          </li>
+          <li>
+            <a href="http://hyperschema.org/mediatypes/siren">Schema for Siren</a>
+          </li>
+          <li>
+            <a href="http://hyperschema.org/mediatypes/uber">Schema for UBER</a>
+          </li>
+        </ul>
+      </section>
+      <section data-background="/assets/warp-speed.jpg" id="hyper" style="top: -20px; display: none;" hidden=""
+        class="future">
+        <h2>
+          JSON
+        </h2>
+        <h1>
+          HYPER
+        </h1>
+        <h2>
+          Schema
+        </h2>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h2>
+          Gives Schemas Links
+        </h2>
+        <pre><code class="r">{
+  <span class="string">"links"</span>: [
+    {
+      <span class="string">"description"</span>: <span class="string">"Create a new app."</span>,
+      <span class="string">"href"</span>: <span class="string">"/apps"</span>,
+      <span class="string">"method"</span>: <span class="string">"POST"</span>,
+      <span class="string">"rel"</span>: <span class="string">"create"</span>
+    },
+    {
+      <span class="string">"description"</span>: <span class="string">"List apps."</span>,
+      <span class="string">"href"</span>: <span class="string">"/apps"</span>,
+      <span class="string">"method"</span>: <span class="string">"GET"</span>,
+      <span class="string">"rel"</span>: <span class="string">"instances"</span>
+    }
+  ],
+  <span class="string">"properties"</span>: {
+    <span class="string">"name"</span>: {
+       <span class="keyword">...</span>
+    }
+  },
+  <span class="string">"required"</span>: [<span class="string">"name"</span>],
+  <span class="string">"type"</span>: <span class="string">"object"</span>
+}</code></pre>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h2>
+          Schema of a Link's Request
+        </h2>
+        <pre><code class="json">{
+  "<span class="attribute">description</span>": <span class="value"><span class="string">"Create a new app."</span></span>,
+  "<span class="attribute">href</span>": <span class="value"><span class="string">"/apps"</span></span>,
+  "<span class="attribute">method</span>": <span class="value"><span class="string">"POST"</span></span>,
+  "<span class="attribute">rel</span>": <span class="value"><span class="string">"create"</span></span>,
+  "<span class="attribute">schema</span>": <span class="value">{
+    "<span class="attribute">properties</span>": <span class="value">{
+      "<span class="attribute">name</span>": <span class="value">{
+        "<span class="attribute">$ref</span>": <span class="value"><span class="string">"#/definitions/app/definitions/name"</span>
+       </span>}
+     </span>}</span>,
+     "<span class="attribute">required</span>": <span class="value">[<span class="string">"name"</span>]</span>,
+     "<span class="attribute">type</span>": <span class="value"><span class="string">"object"</span>
+  </span>}</span>,
+  "<span class="attribute">title</span>": <span class="value"><span class="string">"Create"</span>
+</span>}</code></pre>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h2>
+          ✓
+        </h2>
+        <pre><code class="lasso">$ curl <span class="attribute">-X</span> POST http:<span class="comment">//example.com/apps \</span>
+  <span class="attribute">-H</span> <span class="string">"Content-Type: application/json"</span> \
+  <span class="attribute">-d</span> <span class="string">'{"name":"my-app"}'</span></code></pre>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h2>
+          Schema of a Link's Response
+        </h2>
+        <pre><code class="json">{
+  "<span class="attribute">description</span>": <span class="value"><span class="string">"List apps."</span></span>,
+  "<span class="attribute">href</span>": <span class="value"><span class="string">"/apps"</span></span>,
+  "<span class="attribute">method</span>": <span class="value"><span class="string">"GET"</span></span>,
+  "<span class="attribute">rel</span>": <span class="value"><span class="string">"instances"</span></span>,
+  "<span class="attribute">targetSchema</span>": <span class="value">{
+    "<span class="attribute">items</span>": <span class="value">{
+      "<span class="attribute">$ref</span>": <span class="value"><span class="string">"#/definitions/app"</span>
+    </span>}</span>,
+    "<span class="attribute">type</span>": <span class="value"><span class="string">"array"</span>
+  </span>}</span>,
+  "<span class="attribute">title</span>": <span class="value"><span class="string">"List"</span>
+</span>}</code></pre>
+        <p>
+          Note the reference to the link's parent
+        </p>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h2>
+          ✓
+        </h2>
+        <pre><code class="ruby"><span class="variable">$ </span>curl -<span class="constant">X</span> <span class="constant">GET</span> <span class="symbol">http:</span>/<span class="regexp">/example.com/apps</span>
+[
+  {
+    <span class="string">"name"</span><span class="symbol">:</span> <span class="string">"my-app"</span>,
+    <span class="string">"domains"</span><span class="symbol">:</span> [
+      { <span class="string">"name"</span><span class="symbol">:</span> <span class="string">"example.com },
+      { "</span>name<span class="string">": "</span>heroku.com<span class="string">" }
+    ]
+  }
+]</span></code></pre>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h2>
+          Check out Heroku's!
+        </h2>
+        <pre><code class="avrasm">$ curl -H <span class="string">"Accept: application/vnd.heroku+json; version=3"</span> \
+  https://api<span class="preprocessor">.heroku</span><span class="preprocessor">.com</span>/schema -o schema<span class="preprocessor">.json</span></code></pre>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h1>
+          Meta-schemas
+        </h1>
+        <p>
+          <a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a>
+        </p>
+        <p>
+          <a href="http://json-schema.org/draft-04/hyper-schema#">http://json-schema.org/draft-04/hyper-schema#</a>
+        </p>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h2>
+          JSON Which Validates JSON Which Validates JSON
+        </h2>
+        <h2>
+          ✓
+        </h2>
+        <pre><code class="r">{
+  <span class="string">"definitions"</span>: {
+    <span class="string">"domain"</span>: {
+      links: [
+        <span class="keyword">...</span>
+      ]
+      <span class="keyword">...</span>
+    },
+    <span class="string">"app"</span>: {
+      links: [
+        <span class="keyword">...</span>
+      ]
+      <span class="keyword">...</span>
+    }
+  }
+  <span class="keyword">...</span>
+}</code></pre>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h2>
+          Define Your Own!
+        </h2>
+        <pre><code class="r">{
+  <span class="string">"definitions"</span>: {
+    <span class="string">"resource"</span>: {
+      <span class="string">"properties"</span>: {
+        <span class="string">"links"</span>: {
+          <span class="string">"items"</span>: {
+            <span class="string">"$ref"</span>: <span class="string">"#/definitions/link"</span>
+          },
+          <span class="string">"type"</span>: <span class="string">"array"</span>
+        }
+      }
+    },
+    <span class="string">"link"</span>: {
+      <span class="string">"required"</span>: [ <span class="string">"method"</span>, <span class="string">"targetSchema"</span> ],
+      <span class="string">"type"</span>: <span class="string">"object"</span>
+    }
+  },
+  <span class="keyword">...</span>
+}</code></pre>
+        <p>
+          Requires links to have `method` and `targetSchema`
+        </p>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <pre><code class="r">{
+  <span class="string">"resource"</span>: {
+    <span class="string">"properties"</span>: {
+      <span class="keyword">...</span>,
+      <span class="string">"properties"</span>: {
+        <span class="string">"additionalProperties"</span>: false,
+        <span class="string">"patternProperties"</span>: {
+          <span class="string">"^[a-z][a-z_]+[a-z]$"</span>: {}
+        }
+      }
+    }
+  }
+}</code></pre>
+        <p>
+          Requires params to use only `[a-z]` and underscores
+        </p>
+        <p>
+          ✓ parameter_name
+        </p>
+        <p>
+          ✗ parameter-name
+        </p>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h2>
+          Check out Heroku's Meta-schema!
+        </h2>
+        <pre><code class="avrasm">$ curl https://interagent<span class="preprocessor">.github</span><span class="preprocessor">.io</span>/interagent-hyper-schema -o meta<span class="preprocessor">.json</span></code></pre>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h1>
+          Human + Machine Readable
+        </h1>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h1>
+          Heroics
+        </h1>
+        <h2>
+          Ruby client generation
+        </h2>
+        <a href="https://github.com/interagent/heroics">github.com/interagent/heroics</a>
+        <pre><code class="avrasm">$ heroics-generate schema<span class="preprocessor">.json</span> &gt; client<span class="preprocessor">.rb</span></code></pre>
+        <pre><code class="r">&gt; heroku.app.create
+=&gt; { <span class="keyword">...</span> }</code></pre>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h1>
+          Schematic
+        </h1>
+        <h2>
+          Go client generation
+        </h2>
+        <a href="https://github.com/interagent/schematic">github.com/interagent/schematic</a>
+        <pre><code class="avrasm">$ schematic schema<span class="preprocessor">.json</span> &gt; client<span class="preprocessor">.go</span></code></pre>
+        <pre><code class="matlab">&gt; <span class="transposed_variable">heroku.</span><span class="transposed_variable">app.</span>createapp, err := <span class="transposed_variable">h.</span>AppCreate()
+<span class="keyword">if</span> err != nil <span class="cell">{
+   panic(err)
+}</span>
+<span class="transposed_variable">fmt.</span>Println(<span class="transposed_variable">app.</span>Name)</code></pre>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h1>
+          Prmd
+        </h1>
+        <h2>
+          Documentation &amp; tools
+        </h2>
+        <p>
+          <a href="https://github.com/interagent/prmd">github.com/interagent/prmd</a>
+        </p>
+        <img src="./assets/v3.png">
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h1>
+          Committee
+        </h1>
+        <h2>
+          Validation &amp; Stubbing
+        </h2>
+        <p>
+          <a href="https://github.com/interagent/committee">github.com/interagent/committee</a>
+        </p>
+        <pre><code class="lasso">$ committee<span class="attribute">-stub</span> <span class="attribute">-p</span> <span class="number">3000</span> schema.json</code></pre>
+        <pre><code class="smalltalk"><span class="char">$ </span>curl <span class="method">http:</span>//<span class="method">localhost:</span><span class="number">3000</span>/apps/my-app
+{
+  <span class="comment">"created_at"</span>: <span class="comment">"2012-01-01T12:00:00Z"</span>,
+  <span class="comment">"git_url"</span>: <span class="comment">"git@heroku.com:example.git"</span>,
+  <span class="comment">"id"</span>: <span class="comment">"01234567-89ab-cdef-0123-456789abcdef"</span>,
+  <span class="comment">"name"</span>: <span class="comment">"example"</span>
+}</code></pre>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h2>
+          Stub Distributed Services
+        </h2>
+        <pre><code class="avrasm"><span class="label">help_stub:</span>    bundle exec committee-stub -p <span class="number">3000</span> help/schema<span class="preprocessor">.json</span>
+<span class="label">logplex_stub:</span> bundle exec committee-stub -p <span class="number">3001</span> logplex/schema<span class="preprocessor">.json</span>
+<span class="label">maestro_stub:</span> bundle exec committee-stub -p <span class="number">3002</span> maestro/schema<span class="preprocessor">.json</span>
+<span class="label">psmgr_stub:</span>   bundle exec committee-stub -p <span class="number">3003</span> psmgr/schema<span class="preprocessor">.json</span>
+<span class="label">vault_stub:</span>   bundle exec committee-stub -p <span class="number">3004</span> vault/schema<span class="preprocessor">.json</span></code></pre>
+      </section>
+      <section style="top: -20px; display: none;" hidden="" class="future">
+        <h2>
+          Test Public Contracts
+        </h2>
+        <pre><code class="ruby"><span class="function"><span class="keyword">def</span> <span class="title">schema_path</span></span>
+  <span class="string">"./schema.json"</span>
+<span class="keyword">end</span>
+
+it <span class="string">"conforms to schema"</span> <span class="keyword">do</span>
+  <span class="variable">@app</span> = <span class="constant">App</span>.create! <span class="symbol">name:</span> <span class="string">"my-app"</span>
+  get <span class="string">"/apps/my-app"</span>
+  assert_equal <span class="number">200</span>, last_response.status
+  assert_schema_conform
+<span class="keyword">end</span></code></pre>
+      </section>
+      <section id="score" style="top: -169.5px; display: block;" hidden="" class="future">
+        <ul>
+          <li>
+            HTTP API guidelines codifies best practices
+          </li>
+          <li>
+            Schema generates clients
+          </li>
+          <li>
+            Schema generations documentation
+          </li>
+          <li>
+            Schema stubs remote services
+          </li>
+          <li>
+            Schema tests contracts
+          </li>
+          <li>
+            Meta-schema validates conventions
+          </li>
+        </ul>
+      </section>
+      <section style="top: -182.5px; display: block;" hidden="" class="future">
+        <h1>
+          Sell Internally
+        </h1>
+        <ul>
+          <li>
+            <a href="https://devcenter.heroku.com/articles/platform-api-reference#app-setup">App Setups</a>
+          </li>
+          <li>
+            <a href="https://devcenter.heroku.com/articles/platform-api-reference#build">Builds</a>
+          </li>
+          <li>
+            <a href="https://devcenter.heroku.com/articles/platform-api-reference#organization">Orgs</a>
+          </li>
+        </ul>
+      </section>
+      <section hidden="" class="future" style="top: -81.5px; display: block;">
+        <p>
+          <a href="https://twitter.com/brandur">@brandur</a>
+        </p>
+      </section>
+    </div>
+    <div class="backgrounds">
+      <div class="slide-background present"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future" data-background-hash="/assets/uuids.jpgnullnullnullnullnullnull"
+        style="background-image: url(&quot;/assets/uuids.jpg&quot;);"></div>
+      <div class="slide-background future" data-background-hash="/assets/request-bodies.jpgnullnullnullnullnullnull"
+        style="background-image: url(&quot;/assets/request-bodies.jpg&quot;);"></div>
+      <div class="slide-background future" data-background-hash="/assets/naming.jpgnullnullnullnullnullnull"
+        style="background-image: url(&quot;/assets/naming.jpg&quot;);"></div>
+      <div class="slide-background future"
+        data-background-hash="/assets/nullable-parameters.jpgnullnullnullnullnullnull"
+        style="background-image: url(&quot;/assets/nullable-parameters.jpg&quot;);"></div>
+      <div class="slide-background future" data-background-hash="/assets/versioning.jpgnullnullnullnullnullnull"
+        style="background-image: url(&quot;/assets/versioning.jpg&quot;);"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future" data-background-hash="/assets/warp-speed.jpgnullnullnullnullnullnull"
+        style="background-image: url(&quot;/assets/warp-speed.jpg&quot;);"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+      <div class="slide-background future"></div>
+    </div>
+    <div class="progress" style="display: block;"><span style="width: 0px;"></span></div>
+    <aside class="controls" style="display: block;">
+      <div class="navigate-left"></div>
+      <div class="navigate-right enabled"></div>
+      <div class="navigate-up"></div>
+      <div class="navigate-down"></div>
+    </aside>
+    <div class="slide-number"></div>
+    <div class="state-background"></div>
+    <div class="pause-overlay"></div>
+  </div>
+  <script type="text/javascript">
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize( {
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+
+      theme: Reveal.getQueryHash().theme,
+      transition: 'none',
+
+      // Optional libraries used to extend on reveal.js
+      dependencies: [
+      ]
+    } );
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body>
+
+</html>

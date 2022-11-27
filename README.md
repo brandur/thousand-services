@@ -1,5 +1,4 @@
-Composable
-==========
+# The Story of a Thousand Services
 
 Slides for a talk given at some API conferences in 2014.
 
